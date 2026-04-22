@@ -1,23 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Bienvenido a Arachne</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-<div class="form-container">
-    <form action="backend/login.php" method="POST">
-        <h2>Arachne Login</h2>
-        <input type="text" name="usuario" placeholder="Nombre de usuario" required>
-        <input type="password" name="password" placeholder="Contraseña" required>
-        <button type="submit">ENTRAR</button>
-        <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
-        <p><a href="password.html">¿Olvidaste tu contraseña?</a></p>
-    </form>
-</div>
-
+    <div class="form-container">
+        <h2>Bienvenido a Arachne</h2>
+        <p>Elige una opción para continuar</p>
+        
+        <button onclick="window.location.href='login.html'">INICIAR SESIÓN</button>
+        
+        <button onclick="window.location.href='registro.html'" style="background-color: #FFB6C1; margin-top: 15px;">REGISTRARSE</button>
+    </div>
 </body>
 </html>
