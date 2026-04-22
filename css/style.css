@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    /* Fondo degradado en tonos rosa claro y cálido */
+    background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); 
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    background: #FFFFFF;
+    padding: 35px;
+    border-radius: 30px; /* Bordes muy suaves */
+    width: 320px;
+    /* Sombra suave y cálida */
+    box-shadow: 0px 10px 25px rgba(255, 154, 158, 0.3);
+    text-align: center;
+    border: 2px solid #FFB6C1; /* Borde rosa claro */
+}
+
+h2 {
+    color: #D81B60; /* Rosa fuerte/Cálido para títulos */
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+input, select {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 12px;
+    /* Quitamos el gris, usamos un rosa muy tenue para el borde */
+    border: 2px solid #FFE4E1; 
+    border-radius: 15px;
+    box-sizing: border-box;
+    background-color: #FFF5F7; /* Fondo del input rosado muy claro */
+    color: #D81B60;
+    outline: none;
+}
+
+input::placeholder {
+    color: #FFB6C1;
+}
+
+input:focus {
+    border-color: #FF69B4; /* Rosa brillante al seleccionar */
+}
+
+button {
+    width: 100%;
+    /* Botón rosa brillante y cálido */
+    background-color: #FF69B4; 
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0px 4px 10px rgba(255, 105, 180, 0.4);
+    transition: transform 0.2s, background 0.3s;
+}
+
+button:hover {
+    background-color: #D81B60; /* Más oscuro al pasar el mouse */
+    transform: scale(1.02);
+}
+
+p {
+    color: #D81B60;
+    font-size: 14px;
+}
+
+a {
+    color: #FF1493; /* Rosa profundo para enlaces */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
