@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arachne - Selección de Cursos</title>
+    <!-- Importamos la fuente Abril Fatface -->
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style_cursos.css">
+</head>
+<body>
+
+    <header class="header-rosa">
+        <a href="principal.html" style="text-decoration:none; color:inherit;">←</a>
+        <h1 class="abril-fatface">Cursos</h1>
+    </header>
+
+    <!-- Contenedor donde PHP inyectará los cursos -->
+    <main class="lista-cursos" id="contenedor-cursos">
+        <!-- Aquí se cargará el contenido de backend/obtener_cursos.php -->
+    </main>
+
+    <!-- Botón para ir a la vista de agregar -->
+    <a href="agregar_cursos.html" class="btn-agregar">+</a>
+
+    <script>
+        // Función simple para cargar los cursos al abrir la página
+        fetch('backend/cursos.php')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('contenedor-cursos').innerHTML = data;
+            });
+    </script>
+</body>
+</html>

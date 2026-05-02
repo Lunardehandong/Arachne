@@ -1,0 +1,239 @@
+/* Estilo para la vista de selección de cursos */
+body {
+    background-color: #F9A8A8; /* Gris neutro del prototipo */
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+p{
+    padding:20px; color:gray;
+}
+
+.header-rosa {
+    background-color: #F9A8A8; /* Rosa de la ventana principal */
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    color: #388697; /* Azul claro para el texto */
+}
+
+.abril-fatface {
+    font-family: 'Abril Fatface', serif; /* Asegúrate de importar la fuente en el HTML */
+    font-size: 24px;
+    margin-left: 15px;
+}
+
+.lista-cursos {
+    background-color: white;
+    margin-top: 10px;
+}
+
+.curso-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #E0E0E0;
+    text-decoration: none;
+    color: #388697;
+    transition: background 0.3s;
+}
+
+.curso-item:hover {
+    background-color: #fce4e4;
+}
+
+.icon-corazon {
+    margin-right: 15px;
+    font-size: 20px;
+}
+
+/* Botón flotante para agregar cursos */
+.btn-agregar {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #F86A80; /* Color del botón + */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 30px;
+    text-decoration: none;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    border: none;
+    cursor: pointer;
+}
+
+/* ===== DETALLE CURSO (NO AFECTA cursos) ===== */
+
+.detalle-curso {
+    padding: 40px 20px;
+    min-height: 100vh;
+    background-color: transparent;
+}
+
+/* contenedor centrado */
+.detalle-container {
+    max-width: 900px;
+    background-color: #fff;
+    margin: 0 auto;
+}
+
+/* título */
+.detalle-titulo {
+    font-size: 32px;
+    margin-left: 0;
+    margin-bottom: 30px;
+    color: #388697;
+}
+
+/* layout principal */
+.detalle-flex {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    
+}
+
+/* imagen */
+.detalle-img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #E0E0E0;
+}
+
+/* info derecha */
+.detalle-info {
+    flex: 1;
+    min-width: 300px;
+    
+}
+
+/* subtítulos */
+.detalle-subtitulo {
+    margin-left: 0;
+    font-size: 22px;
+    color: #388697;
+}
+
+/* párrafos */
+.detalle-texto {
+    line-height: 1.6;
+    
+}
+
+/* contenido con saltos */
+.detalle-pre {
+    white-space: pre-line;
+}
+
+/* caja costo */
+.detalle-costo-box {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid #F9A8A8;
+    padding-top: 20px;
+}
+
+/* texto costo */
+.detalle-costo-label {
+    font-size: 20px;
+    color: #388697;
+    margin-left: 0;
+}
+
+.detalle-costo-valor {
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+.detalle-creditos {
+    font-weight: bold;
+}
+
+/* botón */
+.detalle-btn {
+    background-color: #F86A80;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+/* ===== AGREGAR CURSO (RESPETA TU DISEÑO) ===== */
+
+.agregar-main {
+    padding: 40px 20px;
+}
+
+.agregar-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.agregar-titulo {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.agregar-group {
+    margin-bottom: 15px;
+}
+
+.agregar-label {
+    font-size: 18px;
+    display: block;
+}
+
+.agregar-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+}
+
+.agregar-textarea-corta {
+    height: 80px;
+}
+
+.agregar-textarea-larga {
+    height: 120px;
+}
+
+.agregar-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.agregar-col {
+    flex: 1;
+}
+
+.agregar-btn-full {
+    width: 100%;
+    padding: 15px;
+    border-radius: 30px;
+}
+
+/* 🔥 SOLO color azul (lo que pediste) */
+.agregar-curso,
+.agregar-curso h1,
+.agregar-curso h2,
+.agregar-curso h3,
+.agregar-curso label,
+.agregar-curso span {
+    color: #388697;
+}
