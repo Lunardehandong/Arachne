@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Arachne - Crear Publicación</title>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style_cursos.css">
+</head>
+<body>
+
+    <header class="header-rosa">
+        <a href="foro.html" class="back-link" style="text-decoration: none; color: #388697; font-size: 24px;">←</a>
+        <span class="abril-fatface">Nueva Publicación</span>
+    </header>
+
+    <main class="lista-cursos" style="padding: 40px 20px;">
+        <div style="max-width: 550px; margin: 0 auto; background: white; padding: 20px; border-radius: 15px;">
+            <h2 class="abril-fatface" style="color: #08415C; margin-bottom: 20px;">¿Qué tienes en mente?</h2>
+            
+            <form id="form-foro">
+                <div style="margin-bottom: 15px;">
+                    <label class="abril-fatface" style="color: #388697;">Título</label>
+                    <input type="text" name="titulo" required placeholder="Ej. Mi primer bordado" 
+                           style="width: 100%; padding: 12px; border: 1px solid #DDD; border-radius: 8px; margin-top: 5px;">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label class="abril-fatface" style="color: #388697;">Descripción</label>
+                    <textarea name="descripcion" required placeholder="Cuéntanos más detalles..." 
+                              style="width: 100%; padding: 12px; border: 1px solid #DDD; border-radius: 8px; height: 120px; margin-top: 5px;"></textarea>
+                </div>
+
+                <button type="submit" class="detalle-btn" style="width: 100%; padding: 15px; font-size: 1.1em;">
+                    Publicar ahora
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('form-foro').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const datos = new FormData(this);
+
+            fetch('backend/guardar_foro.php', {
+                method: 'POST',
+                body: datos
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.status === 'success') {
+                    alert("¡Publicado con éxito!");
+                    window.location.href = 'foro.html';
+                } else {
+                    alert("Hubo un problema al publicar.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

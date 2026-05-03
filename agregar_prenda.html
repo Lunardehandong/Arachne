@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Arachne - Agregar Prenda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style_cursos.css">
+</head>
+<body>
+
+<header class="header-rosa">
+    <a href="prendas.html" style="text-decoration:none; color:inherit; font-size: 24px;">←</a>
+    <span class="abril-fatface">Nueva Prenda</span>
+</header>
+
+<main class="lista-cursos agregar-curso agregar-main">
+    <div class="agregar-container">
+        <h1 class="abril-fatface agregar-titulo">Detalles de la Prenda</h1>
+        
+        <form id="form-nueva-prenda" enctype="multipart/form-data">
+            
+            <div class="agregar-group">
+                <label class="abril-fatface agregar-label">Nombre de la Prenda</label>
+                <input type="text" name="nombre_prenda" required class="agregar-input">
+            </div>
+
+            <div class="agregar-group">
+                <label class="abril-fatface agregar-label">Descripción Técnica</label>
+                <textarea name="descripcion" required class="agregar-input agregar-textarea-corta" placeholder="Talla, material, marca..."></textarea>
+            </div>
+
+            <div class="agregar-group">
+                <label class="abril-fatface agregar-label">Foto de la Prenda</label>
+                <!-- Campo de archivo para la imagen -->
+                <input type="file" name="imagen" accept="image/*" required class="agregar-input" style="border:none; padding:10px 0;">
+            </div>
+
+            <div class="agregar-row">
+                <div class="agregar-col">
+                    <label class="abril-fatface agregar-label">Estado</label>
+                    <select name="estado_prenda" class="agregar-input">
+                        <option value="Nuevo">Nuevo</option>
+                        <option value="Excelente">Excelente</option>
+                        <option value="Buen Estado">Buen Estado</option>
+                    </select>
+                </div>
+
+                <div class="agregar-col">
+                    <label class="abril-fatface agregar-label">Tipo</label>
+                    <select name="tipo_servicio" class="agregar-input">
+                        <option value="Donación">Donación</option>
+                        <option value="Intercambio">Intercambio</option>
+                        <option value="Ambos">Venta</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="agregar-group">
+                <label class="abril-fatface agregar-label">Costo (Créditos)</label>
+                <input type="number" name="costo_creditos" value="0" class="agregar-input">
+            </div>
+
+            <button type="submit" class="detalle-btn agregar-btn-full">
+                Publicar Prenda
+            </button>
+
+        </form>
+    </div>
+</main>
+
+<script>
+document.getElementById('form-nueva-prenda').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const datos = new FormData(this);
+
+    // Llamada al archivo PHP en la carpeta backend
+    fetch('backend/agregar_prenda.php', {
+        method: 'POST',
+        body: datos
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.status === 'success') {
+            alert("¡Prenda publicada exitosamente!");
+            window.location.href = 'prendas.html';
+        } else {
+            alert("Error: " + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("Error de conexión al publicar la prenda.");
+    });
+});
+</script>
+
+</body>
+</html>

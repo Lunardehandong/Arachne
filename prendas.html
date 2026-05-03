@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Arachne - Selección de Prendas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style_cursos.css">
+    <style>
+        /* Botón Donar abajo a la izquierda */
+        .btn-donar {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #388697; /* Azul para diferenciarlo */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 30px;
+            text-decoration: none;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-rosa">
+        <!-- Regresar a Principal -->
+        <a href="principal.html" style="text-decoration:none; color:inherit; font-size: 24px;">←</a>
+        <h1 class="abril-fatface">Prendas</h1>
+    </header>
+
+    <main class="lista-cursos" id="contenedor-prendas">
+        <!-- El JS cargará los datos aquí -->
+    </main>
+
+    <!-- Botón Donar (Abajo Izquierda) -->
+    <a href="donar_prenda.html" class="btn-donar">🎁</a>
+
+    <!-- Botón Agregar (Abajo Derecha) -->
+    <a href="agregar_prenda.html" class="btn-agregar">+</a>
+
+    <script>
+    // Apuntamos a la carpeta backend
+    fetch('backend/prendas.php') 
+        .then(response => {
+            if (!response.ok) throw new Error('No se encontró el archivo PHP');
+            return response.json();
+        })
+        .then(data => {
+            const contenedor = document.getElementById('contenedor-prendas');
+            contenedor.innerHTML = ""; 
+
+            if (data.length === 0) {
+                contenedor.innerHTML = '<p style="padding:20px; color:gray;">No hay prendas en la base de datos.</p>';
+                return;
+            }
+
+            data.forEach(prenda => {
+                // Ajustamos también la ruta de las imágenes si están dentro de backend
+               // Ahora buscamos en backend/img_prendas/
+let imagenHTML = prenda.url_imagen 
+    ? `<img src="backend/img_prendas/${prenda.url_imagen}" style="width:50px; height:50px; object-fit:cover; margin-right:15px; border-radius:5px;">`
+    : `<div style="width:50px; height:50px; background:#E0E0E0; margin-right:15px; border-radius:5px; display:flex; align-items:center; justify-content:center; color:gray; font-size:10px;">Sin Foto</div>`;
+
+                const item = document.createElement('a');
+                item.href = `detalles_prenda.html?id=${prenda.id_prenda}`;
+                item.className = 'curso-item';
+                item.innerHTML = `
+                    <span class="icon-corazon">♡</span>
+                    ${imagenHTML}
+                    <div style="display:flex; flex-direction:column;">
+                        <span class="abril-fatface" style="font-size:18px; color:#388697;">${prenda.nombre_prenda}</span>
+                        <span style="font-size:12px; color:gray;">Subido por: ${prenda.nombre_usuario} | ${prenda.costo_creditos} Créditos</span>
+                    </div>
+                `;
+                contenedor.appendChild(item);
+            });
+        })
+        .catch(error => {
+            console.error("Error en Fetch:", error);
+            document.getElementById('contenedor-prendas').innerHTML = '<p style="padding:20px;">Error al conectar con el backend.</p>';
+        });
+</script>
+</body>
+</html>

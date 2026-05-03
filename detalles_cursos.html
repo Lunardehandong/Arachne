@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Arachne - Detalles del Curso</title>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style_cursos.css">
+</head>
+<body>
+
+<header class="header-rosa">
+    <a href="cursos.html" class="back-link">←</a>
+    <span class="abril-fatface">Cursos</span>
+</header>
+
+<main class="lista-cursos detalle-curso">
+    
+    <div class="detalle-container">
+        
+        <h1 id="titulo" class="abril-fatface detalle-titulo"></h1>
+
+        <div class="detalle-flex">
+            
+            <img id="img-curso" class="detalle-img" src="" alt="Portada">
+
+            <div class="detalle-info">
+                
+                <h3 class="abril-fatface detalle-subtitulo">Descripción</h3>
+                <p id="desc" class="detalle-texto"></p>
+
+                <h3 class="abril-fatface detalle-subtitulo">Contenido</h3>
+                <p id="detalle" class="detalle-texto detalle-pre"></p>
+                
+                <div class="detalle-costo-box">
+                    <div>
+                        <span class="abril-fatface detalle-costo-label">Costo: </span>
+                        <span id="costo" class="detalle-costo-valor"></span>
+                        <span class="detalle-creditos"> créditos</span>
+                    </div>
+                    
+                    <button onclick="comprarCurso()" class="detalle-btn">
+                        Agregar curso
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<script>
+const id = new URLSearchParams(window.location.search).get('id');
+
+fetch(`backend/obtener_detalles.php?id=${id}`)
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById('titulo').textContent = data.nombre_curso;
+        document.getElementById('desc').textContent = data.descripcion;
+        document.getElementById('detalle').textContent = data.contenido_detallado;
+        document.getElementById('costo').textContent = data.creditos;
+        document.getElementById('img-curso').src = 'backend/img/' + (data.url_imagen || 'curso_default.jpg');
+    });
+
+function comprarCurso() {
+    const idCurso = new URLSearchParams(window.location.search).get('id');
+
+    const datos = new FormData();
+    datos.append('id_curso', idCurso);
+
+    fetch('backend/inscribir_curso.php', {
+        method: 'POST',
+        body: datos
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert("¡Agregado! Ahora puedes verlo en tu perfil.");
+            window.location.href = 'principal.html'; 
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(err => console.error("Error:", err));
+}
+</script>
+
+</body>
+</html>

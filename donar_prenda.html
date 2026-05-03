@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Arachne - Donar Prenda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style_cursos.css">
+</head>
+<body>
+
+<header class="header-rosa">
+    <a href="prendas.html" style="text-decoration:none; color:inherit; font-size: 24px;">←</a>
+    <span class="abril-fatface">Donar a la Comunidad</span>
+</header>
+
+<main class="lista-cursos agregar-curso agregar-main">
+    <div class="agregar-container">
+        <h1 class="abril-fatface agregar-titulo" style="text-align:center;">¡Gracias por donar! 🎁</h1>
+        <p style="text-align:center; margin-bottom:20px;">Tu prenda ayudará a alguien más en la comunidad.</p>
+        
+        <form id="form-donar-prenda" enctype="multipart/form-data">
+            
+            <div class="agregar-group">
+                <label class="abril-fatface agregar-label">¿Qué vas a donar?</label>
+                <input type="text" name="nombre_prenda" placeholder="Ej. Suéter de lana" required class="agregar-input">
+            </div>
+
+            <div class="agregar-group">
+                <label class="abril-fatface agregar-label">Cuéntanos un poco más</label>
+                <textarea name="descripcion" required class="agregar-input agregar-textarea-corta" placeholder="Talla, color y detalles..."></textarea>
+            </div>
+
+            <div class="agregar-group">
+                <label class="abril-fatface agregar-label">Sube una foto</label>
+                <input type="file" name="imagen" accept="image/*" required class="agregar-input" style="border:none;">
+            </div>
+
+            <div class="agregar-group">
+                <label class="abril-fatface agregar-label">Estado de la prenda</label>
+                <select name="estado_prenda" class="agregar-input">
+                    <option value="Nuevo">Completamente Nuevo</option>
+                    <option value="Excelente">Casi como nuevo</option>
+                    <option value="Buen Estado">Usado pero bien cuidado</option>
+                </select>
+            </div>
+
+            <button type="submit" class="detalle-btn agregar-btn-full" style="background-color: #388697;">
+                Confirmar Donación
+            </button>
+
+        </form>
+    </div>
+</main>
+
+<script>
+document.getElementById('form-donar-prenda').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const datos = new FormData(this);
+
+    fetch('backend/donar_prenda.php', {
+        method: 'POST',
+        body: datos
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.status === 'success') {
+            alert("¡Tu donación ha sido registrada! Gracias por compartir.");
+            window.location.href = 'prendas.html';
+        } else {
+            alert("Hubo un problema: " + data.message);
+        }
+    });
+});
+</script>
+
+</body>
+</html>

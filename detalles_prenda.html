@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Arachne - Detalles de la Prenda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style_cursos.css">
+</head>
+<body>
+
+<header class="header-rosa">
+    <a href="prendas.html" style="text-decoration:none; color:inherit; font-size: 24px;">←</a>
+    <span class="abril-fatface">Detalles de la Prenda</span>
+</header>
+
+<main class="detalle-curso">
+    <div class="detalle-container" id="contenido-detalle">
+        <!-- Los datos se cargarán aquí con JS -->
+        <p style="padding:40px; text-align:center;">Cargando información...</p>
+    </div>
+</main>
+
+<script>
+    // 1. Obtener el ID de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const idPrenda = urlParams.get('id');
+
+    if (!idPrenda) {
+        window.location.href = 'prendas.html';
+    }
+
+    // 2. Pedir los datos al PHP
+    fetch(`backend/detalles_prenda.php?id=${idPrenda}`)
+        .then(res => res.json())
+        .then(prenda => {
+            if (prenda.error) {
+                document.getElementById('contenido-detalle').innerHTML = `<p>${prenda.error}</p>`;
+                return;
+            }
+
+            // 3. Renderizar la información usando tus clases de CSS
+            const contenedor = document.getElementById('contenido-detalle');
+            contenedor.innerHTML = `
+                <h1 class="abril-fatface detalle-titulo">${prenda.nombre_prenda}</h1>
+                
+                <div class="detalle-flex">
+                    <img src="backend/img_prendas/${prenda.url_imagen}" alt="${prenda.nombre_prenda}" class="detalle-img">
+                    
+                    <div class="detalle-info">
+                        <h2 class="abril-fatface detalle-subtitulo">Descripción</h2>
+                        <p class="detalle-texto">${prenda.descripcion}</p>
+                        
+                        <div style="margin-top:20px;">
+                            <p><strong>Estado:</strong> ${prenda.estado_prenda}</p>
+                            <p><strong>Tipo:</strong> ${prenda.tipo_servicio}</p>
+                            <p><strong>Publicado por:</strong> ${prenda.nombre_usuario}</p>
+                        </div>
+
+                        <div class="detalle-costo-box">
+                            <span class="abril-fatface detalle-costo-label">Costo:</span>
+                            <span class="detalle-costo-valor">${prenda.costo_creditos} Créditos</span>
+                        </div>
+
+                        <button class="detalle-btn agregar-btn-full" style="margin-top:20px;" onclick="solicitarPrenda(${prenda.id_prenda})">
+                            ${prenda.tipo_servicio === 'Donación' ? 'Obtener Donación' : 'Adquirir Prenda'}
+                        </button>
+                    </div>
+                </div>
+            `;
+        })
+        .catch(err => {
+            console.error(err);
+            document.getElementById('contenido-detalle').innerHTML = `<p>Error al cargar el producto.</p>`;
+        });
+
+    function solicitarPrenda(id) {
+    if (!confirm("¿Deseas confirmar esta operación?")) return;
+
+    const datos = new FormData();
+    datos.append('id_prenda', id);
+    datos.append('accion', 'adquirir'); // Le decimos al PHP qué queremos hacer
+
+    fetch('backend/prendas.php', {
+        method: 'POST',
+        body: datos
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert("¡Operación exitosa! Revisa tu perfil.");
+            // Como pediste, te regresa a la lista de prendas
+            window.location.href = 'prendas.html'; 
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+</script>
+
+</body>
+</html>

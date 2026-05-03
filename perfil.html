@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Arachne - Mi Perfil</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="form-container">
+        <div class="perfil-header">
+            <div class="foto-perfil-placeholder" id="foto-actual">
+                <span id="texto-foto">FOTO</span>
+            </div>
+            
+            <label for="nueva-foto" class="btn-editar-foto" style="cursor:pointer; color:#A2D2FF; text-decoration:underline; font-size:12px;">Cambiar foto de perfil</label>
+            
+            <form id="form-foto" action="backend/perfil.php" method="POST" enctype="multipart/form-data" style="display:none;">
+                <input type="file" name="foto" id="nueva-foto" onchange="document.getElementById('form-foto').submit()">
+            </form>
+            
+            <div class="info-usuario">
+                <h3 id="nombre-usuario-real">Cargando...</h3>
+                <div class="user-info-box">
+                    💰 Créditos Disponibles: <span id="creditos-reales">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN CURSOS -->
+        <div class="seccion-cursos">
+            <div class="titulo-seccion">Mis Cursos Comprados</div>
+            <div id="contenedor-cursos-comprados"></div>
+        </div>
+
+        <!-- SECCIÓN PRENDAS (NUEVA) -->
+        <div class="seccion-cursos" style="margin-top: 20px;">
+            <div class="titulo-seccion">Mis Prendas (Donaciones/Ventas)</div>
+            <div id="contenedor-prendas-usuario"></div>
+        </div>
+
+        <p style="margin-top: 25px;">
+            <a href="principal.html">Volver al Inicio</a>
+        </p>
+    </div>
+
+<script>
+    fetch('backend/perfil.php?obtener_datos_usuario=true')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('nombre-usuario-real').textContent = data.usuario;
+            document.getElementById('creditos-reales').textContent = data.creditos;
+            
+            if (data.foto && data.foto !== '') {
+                const contenedorFoto = document.getElementById('foto-actual');
+                contenedorFoto.innerHTML = `<img src="${data.foto}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">`;
+            }
+
+            // Cargar Cursos
+            const contCursos = document.getElementById('contenedor-cursos-comprados');
+            if(data.cursos.length > 0) {
+                data.cursos.forEach(curso => {
+                    contCursos.innerHTML += `<div class="curso-comprado-item">✔️ ${curso}</div>`;
+                });
+            } else {
+                contCursos.innerHTML = '<p style="font-size:12px; color:#D81B60;">Aún no tienes cursos.</p>';
+            }
+
+            // Cargar Prendas (Reutilizando la lógica de cursos)
+            const contPrendas = document.getElementById('contenedor-prendas-usuario');
+            if(data.prendas.length > 0) {
+                data.prendas.forEach(prenda => {
+                    // Usamos el mismo estilo de clase para que se vea igual
+                    contPrendas.innerHTML += `<div class="curso-comprado-item">👕 ${prenda.nombre} <small>(${prenda.tipo})</small></div>`;
+                });
+            } else {
+                contPrendas.innerHTML = '<p style="font-size:12px; color:#D81B60;">No tienes prendas registradas.</p>';
+            }
+        })
+        .catch(error => console.error('Error al cargar perfil:', error));
+</script>
+</body>
+</html>
