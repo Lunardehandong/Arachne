@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    /* Fondo degradado en tonos rosa claro y cálido */
+    background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); 
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* min-height para asegurar el centrado en móvil */
+    padding: 15px; /* Espacio de seguridad para los bordes del cel */
+}
+
+.form-container {
+    background: #FFFFFF;
+    padding: 45px 30px; /* Aumentamos el aire interno */
+    border-radius: 30px; 
+    width: 95%;        /* Que use el 95% del ancho del celular */
+    max-width: 450px;  /* Subimos de 340px a 450px para que sea más robusto */
+    box-shadow: 0px 10px 25px rgba(255, 154, 158, 0.3);
+    text-align: center;
+    border: 2px solid #FFB6C1; 
+    box-sizing: border-box;
+}
+
+h2 {
+    color: #D81B60; 
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+input, select {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 14px; /* Un poco más de grosor para dedos en móvil */
+    border: 2px solid #FFE4E1; 
+    border-radius: 15px;
+    box-sizing: border-box;
+    /* Fondo un poco más fuerte para que el placeholder blanco resalte */
+    background-color: #FFB6C1; 
+    color: #FFFFFF; /* Texto que escribe el usuario ahora en blanco */
+    outline: none;
+    font-size: 16px; /* Evita zoom automático en iPhone */
+}
+
+/* --- CORRECCIÓN: UNIFICADO Y CAMBIADO A BLANCO --- */
+input::placeholder {
+    color: #FFFFFF !important;
+    opacity: 1; /* Para Firefox */
+}
+
+input:focus {
+    border-color: #FF69B4; 
+}
+
+button {
+    width: 100%;
+    background-color: #FF69B4; 
+    color: white;
+    border: none;
+    padding: 16px; /* Botones más altos para móviles */
+    border-radius: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 17px;
+    box-shadow: 0px 4px 10px rgba(255, 105, 180, 0.4);
+    transition: transform 0.2s, background 0.3s;
+}
+
+button:hover {
+    background-color: #D81B60; 
+    transform: scale(1.02);
+}
+
+p {
+    color: #D81B60;
+    font-size: 14px;
+}
+
+a {
+    color: #FF1493; 
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* --- Nuevas Clases Arachne (Sin borrar ninguna línea) --- */
+.user-info-box {
+    background-color: #FFF5F7;
+    color: #D81B60;
+    padding: 12px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #FFB6C1;
+    font-weight: bold;
+    text-align: center;
+}
+
+.menu-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn-menu-principal {
+    width: 100%;
+    padding: 18px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    text-align: center;
+    transition: 0.3s;
+    border: none;
+    display: block;
+    box-sizing: border-box;
+}
+
+.rosa-fuerte { background-color: #FF69B4; color: white; }
+.rosa-claro { background-color: #FFB6C1; color: white; }
+.rosa-pastel { background-color: #FAD0C4; color: #D81B60; }
+
+.btn-menu-principal:hover {
+    filter: brightness(0.9);
+    transform: scale(1.02);
+}
+
+/* --- Estilos para la Vista de Perfil --- */
+.perfil-header {
+    margin-bottom: 20px;
+}
+
+.foto-perfil-placeholder {
+    width: 100px;
+    height: 100px;
+    background-color: #A2D2FF; 
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    border: 3px solid #FFB6C1;
+}
+
+.info-usuario h3 {
+    color: #D81B60;
+    margin: 5px 0;
+}
+
+.seccion-cursos {
+    text-align: left;
+    margin-top: 25px;
+}
+
+.titulo-seccion {
+    font-size: 14px;
+    color: #FF69B4;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #FFE4E1;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.curso-comprado-item {
+    background-color: #FFF5F7;
+    padding: 10px;
+    border-radius: 12px;
+    border-left: 5px solid #FF69B4;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #D81B60;
+}
+
+.btn-cambiar-foto {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 13px;
+    color: #D81B60; /* Sincronizado con el tono rosa general */
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.input-file-oculto {
+    display: none;
+}
